@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app='pmlis'>
+	<head>
+		<link rel = "stylesheet" type="text/css" href="../styles/bootstrap.min.css" />
+		<link rel = "stylesheet" type="text/css" href="../styles/style.css" />
+		<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+		<title>PMLIS</title>
+	</head>
+	<nav-bar></nav-bar>
+	<body >
+		<H1 align="center">PRESTAMOS MOVILIS</H1>
+		<div align="center" class="w3-container">
+			<label>FILTRAR POR: <input ng-model="searchText" ></label>
+		</div>
+		<div class="w3-container" align="center" ng-controller="prestamosController as prestamos">
+			<ul class="list-group" style="width:80%" ng-controller="nuevoPrestamoController as nPrestamoCtrl">
+				<li class="list-group-item" ng-repeat="objetos in prestamos.objetos | filter:searchText">
+					<nuevo-prestamo></nuevo-prestamo>
+					<h1> {{objetos.nombre}} </h1>
+					<img ng-src="{{objetos.imagen[0].full}}"/>
+					<p/>
+					<section ng-init="tab = 1" ng-controller="PanelController as panel">
+						<ul class="nav nav-pills ul2">
+							<li ng-class="{ active:panel.isSelected(1) }"> <a href ng-click="panel.selectTab(1)">Descripcion</a> </li>
+							<li ng-class="{ active:panel.isSelected(2) }"> <a href ng-click="panel.selectTab(2)">Cantidad</a></li>
+						</ul>
+						<div class ="panel w3-container" ng-show="panel.isSelected(1)" >
+							<h4>Descripcion</h4>
+							<p>{{product.descripcion}}</p>
+						</div>
+						<div class ="panel w3-container" ng-show="panel.isSelected(2)">
+							<h4>Cantidad</h4>
+							<p>{{objetos.cantidad}}</p>
+						</div>
+					</section>
+					<div >
+						<form class="w3-container" align="center" ng-controller="userController as userCtrl " ng-submit="nPrestamoCtrl.setPrestar($index)">
+							<input align="center" type="submit" value="Realizar Prestamo" ng-show="userCtrl.permiso"></input>
+						</form>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/angular.min.js"></script>
+	<script type="text/javascript" src="../js/app.js"></script>
+	<footer-html></footer-html>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app='pmlis'>
+	<head>
+		<link rel = "stylesheet" type="text/css" href="../styles/bootstrap.min.css" />
+		<link rel = "stylesheet" type="text/css" href="../styles/style.css" />
+		<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+		<title>PMLIS</title>
+	</head>
+	<body ng-controller="pmlisController as pmlis">
+		<div class= "container">
+			<nav-bar></nav-bar>
+		</div>
+		<H1 align="center">HISTORIAL DE PRESTAMOS DE MOVILIS</H1>
+		<div align="center" class="w3-container">
+			<label>FILTRAR POR: <input ng-model="searchText" ></label>
+		</div>
+		<p></p>
+		<div class="w3-container">
+			<table style="width:80%" align="center">
+				<tr>
+			    <th>OBJETO</th>
+			    <th>ESTUDIANTE</th> 
+			    <th>FECHA PEDIDO</th>
+			    <th>FECHA DEVOLUCION</th>
+			    <th>ENTREGADO</th>
+			  </tr>
+			</table>
+			<table style="width:80%" align="center" ng-repeat="prestamos in pmlis.prestamos | filter:searchText">
+			  <tr>
+			    <td>{{prestamos.objeto}}</td>
+			    <td>{{prestamos.estudiante}}</td> 
+			    <td>{{prestamos.fechaPrestamo}}</td>
+			    <td>{{prestamos.fechaEntrega}}</td>
+			    <td>{{prestamos.entregado}}</td>
+			  </tr>
+			</table>
+		</div>
+		<br>
+		<script type="text/javascript" src="../js/angular.min.js"></script>
+		<script type="text/javascript" src="../js/app.js"></script>
+	</body>
+	<footer-html></footer-html>
+</html>

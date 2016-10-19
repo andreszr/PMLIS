@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app='pmlis'>
+	<head>
+		<link rel = "stylesheet" type="text/css" href="../styles/bootstrap.min.css" />
+		<link rel = "stylesheet" type="text/css" href="../styles/style.css" />
+		<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+		<title>PMLIS</title>
+	</head>
+	<nav-bar></nav-bar>
+	<body ng-controller="userController as userCtrl">
+		<div class="login-page">
+		  <div class="form">
+		    <form class="login-form" novalidate="true" ng-submit="userCtrl.logear()">
+		      <input type="text" placeholder="username" ng-model= "userCtrl.usuario.usuario"/>
+		      <input type="password" placeholder="password" ng-model= "userCtrl.usuario.pass"/>
+		      <input type="submit" value="Submit" />
+		    </form>
+		  </div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/angular.min.js"></script>
+	<script type="text/javascript" src="../js/app.js"></script>
+	<footer-html></footer-html>
+</html>

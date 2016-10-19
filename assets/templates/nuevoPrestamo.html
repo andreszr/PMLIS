@@ -1,0 +1,21 @@
+<div align="center" class="w3-container"   id="prestamoDiv" style="display:none;">
+	<form name="formPrestamos"  ng-submit="formPrestamos.$valid && nPrestamoCtrl.addPrestamo() && nPrestamoCtrl.getPrestar()" novalidate="true">
+			<label>Dias de prestamo </label>
+			<select ng-model="nPrestamoCtrl.nuevoPrestamo.dias" required="true">
+			<option value ="1">1 Dia</option>
+			<option value ="2">2 Dias</option>
+			<option value ="3">3 Dias</option>
+			<option value ="4">4 Dias</option>
+			<option value ="5">5 Dias</option>
+		</select>
+		<p><input placeholder="Cedula estudiante" ng-model="nPrestamoCtrl.nuevoPrestamo.usuario" required="true"></input></p>
+		<p></p>
+		<label>by:</label>
+		<p></p>
+		<input name="auxiliar"  placeholder="Auxiliar que presta" ng-model="nPrestamoCtrl.nuevoPrestamo.auxiliar" required="true" />
+		<p></p>
+		<input name="objeto"  placeholder="Objeto" ng-model="prestamos.objetos[nPrestamoCtrl.getIndice()].nombre" required="true" />
+		<p></p>
+		<input type="submit" value="Completar Prestamo" />
+	</form>
+</div>
