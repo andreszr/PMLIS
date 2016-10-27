@@ -1,5 +1,5 @@
 (function() {
-	var app = angular.module('pmlis',[]);
+	var app = angular.module('pmlis',['ui.router']);
 
 	app.controller('prestamosController', function(){ //Con un servicio se traen los datos del inventario
 		this.objetos = inventario;
@@ -75,7 +75,24 @@
 			templateUrl: '../templates/footer.html'
 		};
 	});
-
+	app.directive('prestamoHtml', function(){
+		return{
+			restrict: 'E',
+			templateUrl: '../templates/prestamos.html'
+		};
+	});
+	app.directive('loginHtml', function(){
+		return{
+			restrict: 'E',
+			templateUrl: '../templates/login.html'
+		};
+	});
+	app.directive('historialHtml', function(){
+		return{
+			restrict: 'E',
+			templateUrl: '../templates/historial.html'
+		};
+	});
 	app.directive('nuevoPrestamo', function(){
 		return{
 			restrict: 'E',
