@@ -1,6 +1,6 @@
 var pmlis = angular.module('pmlis');
 
-pmlis.config(function($stateProvider, $urlRouterProvider){
+pmlis.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
 	$urlRouterProvider.otherwise('/login');
 	$stateProvider
 	.state("login", {
@@ -10,11 +10,11 @@ pmlis.config(function($stateProvider, $urlRouterProvider){
 	$stateProvider
 	.state("prestamo", {
 		url: "/prestamo",
-		templateUrl: "templates/login.html"
+		templateUrl: "templates/prestamos.html"
 	})
 	$stateProvider
 	.state("historial", {
 		url: "/historial",
-		templateUrl: "templates/login.html"
+		templateUrl: "templates/historial.html"
 	})
-});
+}]);

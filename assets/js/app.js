@@ -1,15 +1,15 @@
 (function() {
-	var app = angular.module('pmlis',['ui.router']);
+	var pmlis = angular.module('pmlis',['ui.router']);
 
-	app.controller('prestamosController', function(){ //Con un servicio se traen los datos del inventario
+	pmlis.controller('prestamosController', function(){ //Con un servicio se traen los datos del inventario
 		this.objetos = inventario;
 	});
 
-	app.controller('pmlisController', function(){ //Se usa un servicio para leer el historial de Prestamos desde el servidor
+	pmlis.controller('pmlisController', function(){ //Se usa un servicio para leer el historial de Prestamos desde el servidor
 		this.prestamos = historialPrestamos;
 	});
 
-	app.controller('PanelController', function(){
+	pmlis.controller('PanelController', function(){
 		this.tab = 1;
 		this.selectTab = function(setTab){
 			this.tab = setTab;
@@ -19,7 +19,7 @@
 		};
 	});
 
-	app.controller('nuevoPrestamoController', function(){
+	pmlis.controller('nuevoPrestamoController', function(){
 		this.nuevoPrestamo = prestamo;
 		this.addPrestamo = function(){
 			prestamo.push(this.nuevoPrestamo);
@@ -37,7 +37,7 @@
 			
 	});
 
-	app.controller('userController', function(){
+	pmlis.controller('userController', ['$state', function($state){
 		this.usuario = user;
 		if(localStorage.permiso === "si"){
 			this.permiso = true;
@@ -59,41 +59,41 @@
 			else{
 				localStorage.setItem("permiso","no");
 			}
-			location.href='prestamos.html';
+			$state.go('prestamo');
 		}
-	});
+	}]);
 
-	app.directive('navBar', function(){
+	pmlis.directive('navBar', function(){
 		return{
 			restrict: 'E',
 			templateUrl: '../templates/nav-bar.html'
 		};
 	});
-	app.directive('footerHtml', function(){
+	pmlis.directive('footerHtml', function(){
 		return{
 			restrict: 'E',
 			templateUrl: '../templates/footer.html'
 		};
 	});
-	app.directive('prestamoHtml', function(){
+	pmlis.directive('prestamoHtml', function(){
 		return{
 			restrict: 'E',
 			templateUrl: '../templates/prestamos.html'
 		};
 	});
-	app.directive('loginHtml', function(){
+	pmlis.directive('loginHtml', function(){
 		return{
 			restrict: 'E',
 			templateUrl: '../templates/login.html'
 		};
 	});
-	app.directive('historialHtml', function(){
+	pmlis.directive('historialHtml', function(){
 		return{
 			restrict: 'E',
 			templateUrl: '../templates/historial.html'
 		};
 	});
-	app.directive('nuevoPrestamo', function(){
+	pmlis.directive('nuevoPrestamo', function(){
 		return{
 			restrict: 'E',
 			templateUrl: '../templates/nuevoPrestamo.html'

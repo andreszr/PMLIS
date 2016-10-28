@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html ng-app='pmlis'>
-	<head>
-		<link rel = "stylesheet" type="text/css" href="../styles/bootstrap.min.css" />
-		<link rel = "stylesheet" type="text/css" href="../styles/style.css" />
-		<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
-		<title>PMLIS</title>
-	</head>
-	<body ng-controller="pmlisController as pmlis">
-		<div class= "container">
-			<nav-bar></nav-bar>
-		</div>
+<div ng-controller="pmlisController as pmlis">
 		<H1 align="center">HISTORIAL DE PRESTAMOS DE MOVILIS</H1>
 		<div align="center" class="w3-container">
 			<label>FILTRAR POR: <input ng-model="searchText" ></label>
@@ -36,6 +25,4 @@
 			</table>
 		</div>
 		<br>
-	</body>
-	<footer-html></footer-html>
-</html>
+	</div>
