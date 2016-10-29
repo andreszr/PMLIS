@@ -20,11 +20,25 @@
 	});
 
 	pmlis.controller('nuevoPrestamoController', function(){
-		this.nuevoPrestamo = prestamo;
+		this.nuevoPrestamo;
 		this.addPrestamo = function(){
-			prestamo.push(this.nuevoPrestamo);
-			localStorage.setItem("prestamo",prestamo);
-			alert("Prestamo realizado");
+			var objeto = "goPro";
+			var estudiante = this.nuevoPrestamo.usuario;
+			var dias = this.nuevoPrestamo.dias;
+			var aux = this.nuevoPrestamo.auxiliar;
+			alert("Prestamo realizado"+objeto+estudiante+dias+aux);
+			var http = new XMLHttpRequest();
+			var url = "http://localhost:1337/prestamo";
+			var params = "objeto="+objeto+"&estudiante="+estudiante+"&dias="+dias+"&aux="+aux;
+			http.open("POST", url, true);
+			//Send the proper header information along with the request
+			http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			http.onreadystatechange = function() {//Call a function when the state changes.
+			    if(http.readyState == 4 && http.status == 200) {
+			        alert(http.responseText);
+			    }
+			}
+			http.send(params);
 			document.getElementById('prestamoDiv').style.display = "none";
 		}
 		this.setPrestar = function (index) {
@@ -99,23 +113,21 @@
 			templateUrl: '../templates/nuevoPrestamo.html'
 		};
 	});
-
-	var historialPrestamos =[ {
-		objeto: 'GoPro Hero2',
-		estudiante: 'Julian Vasquez',
-		fechaPrestamo: 'Ayer',
-		fechaEntrega: 'Manana',
-		entregado: 'Si',
-	},
-	{
-		objeto: 'Router Cisco',
-		estudiante: 'Travis Barker',
-		fechaPrestamo: 'Ayer',
-		fechaEntrega: 'Manana',
-		entregado: 'No',
-		
-	}	
-	];
+	var historialPrestamos= [];
+	var http = new XMLHttpRequest();
+	var url = "http://localhost:1337/prestamo";
+	//var params = "objeto="+objeto+"&estudiante="+estudiante+"&dias="+dias+"&aux="+aux;
+	http.open("GET", url, true);
+	//Send the proper header information along with the request
+	http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	http.onreadystatechange = function() {//Call a function when the state changes.
+	    if(http.readyState == 4 && http.status == 200) {
+	    	historialPrestamos= http.responseText;
+	        alert(http.responseText);
+	    }
+	}
+	http.send(null);
+	console.log(historialPrestamos)
 	var inventario =[
 	{
 		nombre: 'GoPro',
@@ -145,12 +157,5 @@
 		pass: '',
 		permiso: true
 	}
-	var prestamo = [
-	{
-		dias:'2', 
-		usuario:'1035436986', 
-		auxiliar:'yo'
-	}
-	]
 
 })();
