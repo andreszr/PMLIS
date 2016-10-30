@@ -52,7 +52,7 @@
 	});
 
 	pmlis.controller('userController', ['$state', function($state){
-		this.usuario = user;
+		this.usuario = {};
 		if(localStorage.permiso === "si"){
 			this.permiso = true;
 		}
@@ -67,7 +67,20 @@
 			return this.permiso;
 		};
 		this.logear = function(){
-			if(this.usuario.usuario === "root"){
+			var http = new XMLHttpRequest();
+			var usuario;
+			var url = "http://localhost:1337/user?nombre="+this.usuario.usuario;
+			//var params = "objeto="+objeto+"&estudiante="+estudiante+"&dias="+dias+"&aux="+aux;
+			http.open("GET", url, false);
+			//Send the proper header information along with the request
+			http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			http.onreadystatechange = function() {//Call a function when the state changes.
+			    if(http.readyState == 4 && http.status == 200) {
+			    	usuario= JSON.parse(http.responseText);
+			    }
+			}
+			http.send(null);
+			if(usuario[0].permiso){
 				localStorage.setItem("permiso","si");
 			}
 			else{
@@ -123,11 +136,10 @@
 	http.onreadystatechange = function() {//Call a function when the state changes.
 	    if(http.readyState == 4 && http.status == 200) {
 	    	historialPrestamos= http.responseText;
-	        alert(http.responseText);
+	        historialPrestamos = JSON.parse(historialPrestamos);
 	    }
 	}
 	http.send(null);
-	console.log(historialPrestamos)
 	var inventario =[
 	{
 		nombre: 'GoPro',
@@ -152,10 +164,4 @@
 		]
 	}
 	];
-	var user = {
-		usuario: '',
-		pass: '',
-		permiso: true
-	}
-
 })();
