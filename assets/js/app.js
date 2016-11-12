@@ -28,11 +28,11 @@
 			var estudiante = this.nuevoPrestamo.usuario;
 			var dias = this.nuevoPrestamo.dias;
 			var aux = this.nuevoPrestamo.auxiliar;
-			//alert("Prestamo realizado"+objeto+estudiante+dias+aux);
+			alert("Prestamo realizado");
 			var http = new XMLHttpRequest();
 			var url = "http://localhost:1337/prestamo";
 			var params = "id_objeto="+objeto+"&cedula_estudiante="+estudiante+"&dias_plazo="+dias+"&aux="+aux+"&estado_devolucion=none";
-			http.open("PUT", url, false);
+			http.open("POST", url, false);
 			//Send the proper header information along with the request
 			http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			http.onreadystatechange = function() {//Call a function when the state changes.
@@ -41,7 +41,18 @@
 			    }
 			}
 			http.send(params);
-			//PARA ACTUALIZAR: http://localhost:1337/usuario/{id}?correo=correo@gmail.com
+			var http2 = new XMLHttpRequest();
+			var url2 = "http://localhost:1337/objeto/"+inventario[this.getIndice()].id;
+			var params = "disponibilidad=false";
+			http2.open("PUT", url2, false);
+			//Send the proper header information along with the request
+			http2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			http2.onreadystatechange = function() {//Call a function when the state changes.
+			    if(http2.readyState == 4 && http2.status == 200) {
+			        alert(http2.responseText);
+			    }
+			}
+			http2.send(params);
 			document.getElementById('prestamoDiv').style.display = "none";
 		}
 		this.setPrestar = function (index) {
