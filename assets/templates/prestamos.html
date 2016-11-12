@@ -7,21 +7,21 @@
 			<ul class="list-group" style="width:80%" ng-controller="nuevoPrestamoController as nPrestamoCtrl">
 				<li class="list-group-item" ng-repeat="objetos in prestamos.objetos | filter:searchText ">
 					<nuevo-prestamo></nuevo-prestamo>
-					<h1> {{objetos.nombre}} </h1>
+					<h1> {{objetos.id_objeto}} </h1>
 					<img ng-src="{{objetos.imagen[0].full}}"/>
 					<p/>
 					<section ng-init="tab = 1" ng-controller="PanelController as panel">
 						<ul class="nav nav-pills ul2">
 							<li ng-class="{ active:panel.isSelected(1) }"> <a href ng-click="panel.selectTab(1)">Descripcion</a> </li>
-							<li ng-class="{ active:panel.isSelected(2) }"> <a href ng-click="panel.selectTab(2)">Cantidad</a></li>
+							<li ng-class="{ active:panel.isSelected(2) }"> <a href ng-click="panel.selectTab(2)">Estado</a></li>
 						</ul>
 						<div class ="panel w3-container" ng-show="panel.isSelected(1)" >
 							<h4>Descripcion</h4>
-							<p>{{product.descripcion}}</p>
+							<p>{{objetos.nombre_objeto}}</p>
 						</div>
 						<div class ="panel w3-container" ng-show="panel.isSelected(2)">
 							<h4>Cantidad</h4>
-							<p>{{objetos.cantidad}}</p>
+							<p>{{objetos.estado}}</p>
 						</div>
 					</section>
 					<div >

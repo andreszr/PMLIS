@@ -16,9 +16,9 @@
 			</table>
 			<table style="width:80%" align="center" ng-repeat="prestamos in pmlis.prestamos | filter:searchText">
 			  <tr>
-			    <td>{{prestamos.objeto}}</td>
-			    <td>{{prestamos.estudiante}}</td> 
-			    <td>{{prestamos.dias}}</td>
+			    <td>{{prestamos.id_objeto}}</td>
+			    <td>{{prestamos.cedula_estudiante}}</td> 
+			    <td>{{prestamos.dias_plazo}}</td>
 			    <td>{{prestamos.aux}}</td>
 			    <td>{{prestamos.entregado}}</td>
 			  </tr>
