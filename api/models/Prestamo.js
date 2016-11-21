@@ -12,7 +12,7 @@ module.exports = {
   	cedula_estudiante: 'string',
   	dias_plazo: 'string',
   	aux: 'string',
-  	estado_devolucion: 'string'
+  	entregado: 'boolean'
   }
 };
 

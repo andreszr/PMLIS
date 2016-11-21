@@ -9,6 +9,49 @@
 	pmlis.controller('pmlisController', function(){ //Se usa un servicio para leer el historial de Prestamos desde el servidor
 		//var historialPrestamos = cargarHistorial();
 		this.prestamos = historialPrestamos;
+		this.realizarDevolucion = function(indiceId,idObjeto){
+			indiceId= indiceId + 1;
+			var http = new XMLHttpRequest();
+			var url = "http://localhost:1337/prestamo/"+indiceId;
+			var params = "entregado=true";
+			http.open("PUT", url, false);
+			//Send the proper header information along with the request
+			http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			http.onreadystatechange = function() {//Call a function when the state changes.
+			    if(http.readyState == 4 && http.status == 200) {
+			        alert("Devolucion realizada");
+			    }
+			}
+			http.send(params);
+			this.devolverObjeto(idObjeto);
+		}
+		this.devolverObjeto = function(idObjeto){
+			var http = new XMLHttpRequest();
+			var url = "http://localhost:1337/objeto?id_objeto="+idObjeto;
+			http.open("GET", url, false);
+			//Send the proper header information along with the request
+			http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			http.onreadystatechange = function() {//Call a function when the state changes.
+		    	if(http.readyState == 4 && http.status == 200) {
+		    		inventario= http.responseText;
+		    	    inventario = JSON.parse(inventario);
+			    }
+			}
+			http.send(null);
+
+			var http2 = new XMLHttpRequest();
+			var url2 = "http://localhost:1337/objeto/"+inventario[0].id;
+			var params = "disponibilidad=true";
+			http2.open("PUT", url2, false);
+			//Send the proper header information along with the request
+			http2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			http2.onreadystatechange = function() {//Call a function when the state changes.
+			    if(http.readyState == 4 && http.status == 200) {
+			        
+			    }
+			}
+			http2.send(params);	
+			}
 	});
 
 	pmlis.controller('PanelController', function(){
@@ -31,7 +74,7 @@
 			alert("Prestamo realizado");
 			var http = new XMLHttpRequest();
 			var url = "http://localhost:1337/prestamo";
-			var params = "id_objeto="+objeto+"&cedula_estudiante="+estudiante+"&dias_plazo="+dias+"&aux="+aux+"&estado_devolucion=none";
+			var params = "id_objeto="+objeto+"&cedula_estudiante="+estudiante+"&dias_plazo="+dias+"&aux="+aux+"&entregado=false";
 			http.open("POST", url, false);
 			//Send the proper header information along with the request
 			http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

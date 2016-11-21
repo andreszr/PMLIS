@@ -4,25 +4,26 @@
 			<label>FILTRAR POR: <input ng-model="searchText" ></label>
 		</div>
 		<p></p>
-		<div class="w3-container">
-			<table style="width:80%" align="center">
-				<tr>
-			    <th>OBJETO</th>
-			    <th>ESTUDIANTE</th> 
-			    <th>DIAS</th>
-			    <th>AUXILIAR</th>
-			    <th>ENTREGADO</th>
-			  </tr>
-			</table>
-			<table style="width:80%" align="center" ng-repeat="prestamos in pmlis.prestamos | filter:searchText">
-			  <tr>
-			    <td>{{prestamos.id_objeto}}</td>
-			    <td>{{prestamos.cedula_estudiante}}</td> 
-			    <td>{{prestamos.dias_plazo}}</td>
-			    <td>{{prestamos.aux}}</td>
-			    <td>{{prestamos.entregado}}</td>
-			  </tr>
-			</table>
+		<div class="w3-container" >
+				<table style="width:80%" align="center">
+					<tr>
+				    <th>OBJETO</th>
+				    <th>ESTUDIANTE</th> 
+				    <th>DIAS</th>
+				    <th>AUXILIAR</th>
+				    <th>ENTREGADO</th>
+				  </tr>
+				</table>
+				<table style="width:80%" align="center" ng-repeat="prestamos in pmlis.prestamos | filter:searchText" >
+				  <tr>
+				    <td>{{prestamos.id_objeto}}</td>
+				    <td>{{prestamos.cedula_estudiante}}</td> 
+				    <td>{{prestamos.dias_plazo}}</td>
+				    <td>{{prestamos.aux}}</td>
+				    <td ng-show="prestamos.entregado">{{prestamos.entregado}}</td>
+				    <td ng-show="!prestamos.entregado"> <button ng-click="pmlis.realizarDevolucion($index,prestamos.id_objeto)">Realizar Devolucion</button></td>
+				  </tr>
+				</table>
 		</div>
 		<br>
 	</div>
