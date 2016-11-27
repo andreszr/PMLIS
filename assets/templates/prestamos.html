@@ -8,7 +8,7 @@
 			<nuevo-prestamo></nuevo-prestamo>
 				<li class="list-group-item" ng-show="objetos.disponibilidad" ng-repeat="objetos in prestamos.objetos | filter:searchText ">
 					<h1> {{objetos.id_objeto}} </h1>
-					<img ng-src="{{objetos.imagen[0].full}}"/>
+					<img ng-src="../images/{{objetos.id_objeto}}.jpg"/>
 					<p/>
 					<section ng-init="tab = 1" ng-controller="PanelController as panel" >
 						<ul class="nav nav-pills ul2">
