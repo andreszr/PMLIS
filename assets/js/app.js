@@ -147,6 +147,44 @@
 		}
 	}]);
 
+	pmlis.controller('enviarCorreoController', ['$scope', '$state', 'enviarCorreoService', function ($scope, $state, enviarCorreoService) {
+		$scope.enviarCorreoPrestamo = function () {
+		    var correo = null;
+		    var nombre  = null;
+		    console.log("entro enviar correo controller");
+
+		    var credenciales = {
+		      nombre: "auxiliar",
+		      correo: "oandreszr@gmail.com"
+		    };
+		    $scope.enviando = true;
+
+		    enviarCorreoService.enviarCorreo(credenciales)
+		    .success(function(resultado) {
+		      $scope.token = resultado;
+		      $scope.enviando = false;
+		    })
+		    .error(function(err) {
+		      $scope.mensajeAlerta = "Error, el correo electrónico ingresado no existe.";
+		      $scope.enviando = false;
+		    });
+		}
+	}]);
+
+	pmlis.factory('enviarCorreoService', ['$http', function($http){
+		return {
+			// Inicia el proceso de enviar un correo
+			enviarCorreo: function (usuario) {
+				var correo = $http({
+					url: '/prestamo/realizarPrestamo',
+					method: 'POST',
+					params: usuario
+				});
+				return correo;
+			},
+		}
+	}]);
+
 	pmlis.directive('navBar', function(){
 		return{
 			restrict: 'E',

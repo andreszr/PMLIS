@@ -1,4 +1,4 @@
-<div align="center" class="w3-container"   id="prestamoDiv" style="display:none;">
+<div ng-controller="enviarCorreoController" align="center" class="w3-container"   id="prestamoDiv" style="display:none;">
 	<form name="formPrestamos"  ng-submit="formPrestamos.$valid && nPrestamoCtrl.addPrestamo() && nPrestamoCtrl.getPrestar()" novalidate="true">
 			<label>Dias de prestamo </label>
 			<select id="selectDia" ng-model="nPrestamoCtrl.nuevoPrestamo.dias" required="true">
@@ -16,6 +16,6 @@
 		<p></p>
 		<input id="object" name="objeto"  placeholder="Objeto" ng-model="prestamos.objetos[nPrestamoCtrl.getIndice()].id_objeto" required="true" />
 		<p></p>
-		<input type="submit" value="Completar Prestamo" />
+		<input type="submit" value="Completar Prestamo" ng-click='enviarCorreoPrestamo()' />
 	</form>
 </div>
