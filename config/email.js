@@ -8,10 +8,8 @@ var generator = require('xoauth2').createXOAuth2Generator({
 
 module.exports.email = {
 	 service: "Gmail",
-	 auth: {
-		 xoauth2:generator
-	 },
+	auth: {user: 'pmlisreport@gmail.com', pass: 'pml1sp4ss'},
 	 templateDir: "api/emailTemplates",
-	 from: "oandreszr@gmail.com",
+	 from: "pmlisreport@gmail.com",
 	 testMode: false,
 };

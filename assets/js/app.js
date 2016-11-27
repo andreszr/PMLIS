@@ -155,7 +155,7 @@
 
 		    var credenciales = {
 		      nombre: "auxiliar",
-		      correo: "oandreszr@gmail.com"
+		      correo: "sonorks@gmail.com"
 		    };
 		    $scope.enviando = true;
 
