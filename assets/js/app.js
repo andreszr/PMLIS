@@ -9,6 +9,26 @@
 	pmlis.controller('pmlisController', function(){ //Se usa un servicio para leer el historial de Prestamos desde el servidor
 		//var historialPrestamos = cargarHistorial();
 		this.prestamos = historialPrestamos;
+		this.prestamosVencidos = function(){
+			var respuesta = null;
+			var vencidos="Los prestamos vencidos son: \n";
+			var http = new XMLHttpRequest();
+			var url = "http://localhost:8080/PMLISService/webresources/pojo.prestamo/fechaPrestamo/";
+			for(var i = 1; i<this.prestamos.length; i++){
+				http.open("GET",url+i,false);
+				http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				http.onreadystatechange = function() {//Call a function when the state changes.
+		    	if(http.readyState == 4 && http.status == 200) {
+		    		respuesta= http.responseText;
+		    		if(respuesta==="true" && historialPrestamos[i].entregado === false){
+		    			vencidos = vencidos + " " + historialPrestamos[i].cedula_estudiante;
+		    		}
+			    }
+			}
+			http.send(null);
+		}
+		alert(vencidos);
+	}
 		this.realizarDevolucion = function(indiceId,idObjeto){
 			indiceId= indiceId + 1;
 			var http = new XMLHttpRequest();
