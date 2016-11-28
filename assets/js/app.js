@@ -7,7 +7,6 @@
 	});
 
 	pmlis.controller('pmlisController', function(){ //Se usa un servicio para leer el historial de Prestamos desde el servidor
-		//var historialPrestamos = cargarHistorial();
 		this.prestamos = historialPrestamos;
 		this.prestamosVencidos = function(){
 			var respuesta = null;
